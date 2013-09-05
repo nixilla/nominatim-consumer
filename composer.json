@@ -1,0 +1,29 @@
+{
+    "name": "nixilla/nominatim-consumer",
+    "description": "Nominatim consumer in PHP",
+    "type": "library",
+    "keywords": [ "nominatim", "osm", "api" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Janusz Slota",
+            "email": "janusz.slota@nixilla.com",
+            "homepage": "http://www.nixilla.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "kriswallsmith/buzz": "~0.10"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Nominatim": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
