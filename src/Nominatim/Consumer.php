@@ -21,10 +21,19 @@ class Consumer
      */
     protected $converter;
 
-    public function __construct($client, $endpoint)
+    /**
+     * @var array
+     */
+    protected $headers = [];
+
+    public function __construct($client, $endpoint, $email = null)
     {
         $this->client = $client;
         $this->endpoint = $endpoint;
+
+        $this->headers = [
+            'User-Agent' => sprintf('Nomatim PHP Library (https://github.com/nixilla/nominatim-consumer); email: %s', $email ?: 'not set')
+        ];
     }
 
     public function search(Query $query)
@@ -40,17 +49,25 @@ class Consumer
 
     protected function runQuery(Query $query)
     {
-        // @todo call api
+        $input = [
+            'q' => $query->getQuery(),
+            'format' => $this->getConverter()->getFormat()
+        ];
 
+        $response = $this->client->get(sprintf('%s/search?%s', $this->endpoint, http_build_query($input)), $this->headers);
 
-        return $this->getConverter()->convert('[{}]');
+        return $this->getConverter()->convert($response->getContent());
     }
 
     protected function runStructuredQuery(Query $query)
     {
-        // @todo call api
+        $input = $query->getStructuredQuery() + [
+            'format' => $this->getConverter()->getFormat()
+        ];
 
-        return $this->getConverter()->convert('[{}]');
+        $response = $this->client->get(sprintf('%s/search?%s', $this->endpoint, http_build_query($input)), $this->headers);
+
+        return $this->getConverter()->convert($response->getContent());
     }
 
     public function getConverter()
