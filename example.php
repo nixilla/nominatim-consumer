@@ -6,6 +6,7 @@ $consumer = new \Nominatim\Consumer($client, 'http://nominatim.openstreetmap.org
 
 $query = new \Nominatim\Query();
 $query->setQuery('pilkington avenue,birmingham');
+$query->setParam('addressdetails', 1);
 $result = $consumer->search($query);
 
 echo "\n===================\n";
@@ -32,3 +33,4 @@ foreach($result as $item)
     printf('%s @ lat:%s, lon: %s', $item['display_name'], $item['lat'], $item['lon']);
     echo "\n===================\n";
 }
+
