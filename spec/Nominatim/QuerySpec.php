@@ -24,4 +24,10 @@ class QuerySpec extends ObjectBehavior
         $this->setStructuredQuery($params)->shouldReturn($this);
         $this->getStructuredQuery()->shouldReturn($params);
     }
+
+    public function it_sets_params()
+    {
+        $this->setParam('addressdetails', 1)->shouldReturn(null);
+        $this->getParams()->shouldReturn(array('addressdetails' => 1));
+    }
 }
