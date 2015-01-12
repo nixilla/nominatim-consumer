@@ -54,6 +54,8 @@ class Consumer
             'format' => $this->getConverter()->getFormat()
         ];
 
+        $input = array_merge($input, $query->getParams());
+
         $response = $this->client->get(sprintf('%s/search?%s', $this->endpoint, http_build_query($input)), $this->headers);
 
         return $this->getConverter()->convert($response->getContent());

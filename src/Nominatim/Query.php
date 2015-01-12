@@ -8,6 +8,8 @@ class Query
 
     protected $structuredQuery;
 
+    protected $params = array();
+
     public function setQuery($query)
     {
         $this->query = $query;
@@ -30,5 +32,15 @@ class Query
     public function getStructuredQuery()
     {
         return $this->structuredQuery;
+    }
+
+    public function setParam($key, $value)
+    {
+        $this->params[$key] = $value;
+    }
+
+    public function getParams()
+    {
+        return $this->params;
     }
 }
