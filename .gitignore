@@ -5,3 +5,4 @@ my-example.php
 composer.lock
 build
 bin
+.vagrant
